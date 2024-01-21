@@ -1,34 +1,41 @@
 .puzzle{
     border: 2px solid brown;
     display: flex;
-    margin: 0 auto;
     flex-wrap: wrap;
     aspect-ratio: 1/1;
     max-width: 100%;
-    margin: 30px;
-    
+    margin: 30px; 
 }
 
-.puzzle img{
-    width: 9rem;
-    height: 9rem;
-    border: 0.5px solid white;
-    
+.puzzle-img{
+    border: 0.5px solid rgb(134, 43, 43);
+    aspect-ratio: 1/1;   
 }
 
 .shuffle{
     border: 2px solid brown;
-    display: flex;
-    margin: 0 auto;
-    flex-wrap: wrap;
-    margin: 30px;
-    aspect-ratio: 16/4;
     max-width: 100%;
     margin: 30px;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    overflow-y: hidden; /* Hide vertical scrollbar */
+    white-space: nowrap; /* Prevent wrapping of child elements */
 }
 
-.shuffle img{
-    width: 9rem;
-    height: 9rem;
-    border: 0.5px solid white;
+.shuffle-img{
+    border: 0.5px solid rgb(134, 43, 43);
+    aspect-ratio: 1/1;
+    
+    
 }
+.shuffle::-webkit-scrollbar {
+    display: none; /* WebKit (Chrome, Safari, Edge) */
+  }
+
+
+  .selected {
+    
+    border: 2px solid #ffd000;
+  }
+
