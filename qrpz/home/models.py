@@ -5,8 +5,8 @@ from django.db import models
 class Puzzle(models.Model):
     Image = models.ImageField(upload_to="puzzle")
     Name = models.CharField(max_length=100)
-    row = models.IntegerField()
-    col = models.IntegerField()
+    divID = models.IntegerField()
+    
 
 
     def __str__(self):
