@@ -10,6 +10,14 @@
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <link rel="stylesheet" href="{% static "css/puzzle.css" %}">
   <script src="{% static "js/puzzle.js" %}"></script>
+  <style>
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      overflow: hidden;
+    }
+  </style>
 </head>
 
 <body>
@@ -20,8 +28,8 @@
     <div class="row text-center">
       <div class="col-12">
         <div id="board" class="puzzle">
-          <div class="puzzle-img col-3 1" id="div17" onclick="toggleSelection('div17')">17</div>
-          <div class="puzzle-img col-3 2" id="div18" onclick="toggleSelection('div18')">18</div>
+          <div class="puzzle-img col-3" id="div17" onclick="toggleSelection('div17')">17</div>
+          <div class="puzzle-img col-3" id="div18" onclick="toggleSelection('div18')">18</div>
           <div class="puzzle-img col-3" id="div19" onclick="toggleSelection('div19')">19</div>
           <div class="puzzle-img col-3" id="div20" onclick="toggleSelection('div20')">20</div>
           <div class="puzzle-img col-3" id="div21" onclick="toggleSelection('div21')">21</div>
@@ -41,89 +49,24 @@
       </div>
 
 
-      <h2>Turns <span id="turns">0</span></h2>
-
+      <h2>Turns <span id="swapCount">0</span></h2>
 
       <div class="col-12">
         <div class="shuffle">
-          <div class="shuffle-img py-2 m-2 col-2" id="div1" onclick="toggleSelection('div1')">1</div>
-          <div class="shuffle-img py-2 m-2 col-2" id="div2" onclick="toggleSelection('div2')">2</div>
-          <div class="shuffle-img py-2 m-2 col-2" id="div3" onclick="toggleSelection('div3')">3</div>
-          <div class="shuffle-img py-2 m-2 col-2" id="div4" onclick="toggleSelection('div4')">4</div>
-          <div class="shuffle-img py-2 m-2 col-2" id="div5" onclick="toggleSelection('div5')">5</div>
-          <div class="shuffle-img py-2 m-2 col-2" id="div6" onclick="toggleSelection('div6')">6</div>
-          <div class="shuffle-img py-2 m-2 col-2" id="div7" onclick="toggleSelection('div7')">7</div>
-          <div class="shuffle-img py-2 m-2 col-2" id="div8" onclick="toggleSelection('div8')">8</div>
-          <div class="shuffle-img py-2 m-2 col-2" id="div9" onclick="toggleSelection('div9')">9</div>
-          <div class="shuffle-img py-2 m-2 col-2" id="div10" onclick="toggleSelection('div10')">10</div>
-          <div class="shuffle-img py-2 m-2 col-2" id="div11" onclick="toggleSelection('div11')">11</div>
-          <div class="shuffle-img py-2 m-2 col-2" id="div12" onclick="toggleSelection('div12')">12</div>
-          <div class="shuffle-img py-2 m-2 col-2" id="div13" onclick="toggleSelection('div13')">13</div>
-          <div class="shuffle-img py-2 m-2 col-2" id="div14" onclick="toggleSelection('div14')">14</div>
-          <div class="shuffle-img py-2 m-2 col-2" id="div15" onclick="toggleSelection('div15')">15</div>
-          <div class="shuffle-img py-2 m-2 col-2" id="div16" onclick="toggleSelection('div16')">16</div>
+          {% for qr in qr %}
+          <div class="shuffle-img  m-1 col-3" id="div{{qr.id}}" onclick="toggleSelection('div{{qr.id}}')"><img src="{% static "img/1.jpg" %}"></div>
+          {% endfor %}
 
         </div>
       </div>
+
     </div>
   </div>
 
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-    crossorigin="anonymous">  
-  </script>
-
-  <script>
-    function toggleSelection(divId) {
-      var selectedDiv = document.getElementById(divId);
-      selectedDiv.classList.toggle('selected');
-
-      var selectedDivs = document.querySelectorAll('.selected');
-      if (selectedDivs.length === 2) {
-        swapSelectedDivs(selectedDivs);
-      }
-    }
-
-    function swapSelectedDivs(selectedDivs) {
-
-      var tempContent = selectedDivs[0].innerHTML;
-      selectedDivs[0].innerHTML = selectedDivs[1].innerHTML;
-      selectedDivs[1].innerHTML = tempContent;
-
-      
-
-
-
-      selectedDivs.forEach(function (div) {
-        div.classList.remove('selected');
-      });
-
-
-
-      chck();
-    }
-
-    function chck() {
-
-      var puzzleDiv = document.getElementById('board');
-      var divOrder = [];
-      var divElements = puzzleDiv.getElementsByClassName('puzzle-img');
-
-      for (var i = 0; i < divElements.length; i++) {
-        divOrder.push(divElements[i].innerHTML);
-      }
-      var expectedOrder = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16'];
-
-      console.log(expectedOrder);
-      console.log(divOrder);
-      if (JSON.stringify(divOrder) === JSON.stringify(expectedOrder)) {
-        alert('Success');
-      }
-    }
-  </script>
-
-
+    crossorigin="anonymous"></script>
 </body>
 
 </html>
